@@ -39,7 +39,6 @@ public class Point {
      * @return the angle in radians.
      */
     public double getTheta() {
-        computeRadius();
         return Math.acos(x/this.r);
     }
 
@@ -51,7 +50,6 @@ public class Point {
      * @return the degree of the angle.
      */
     public double getAngleInDegrees() {
-        computeRadius();
         return Math.toDegrees(getTheta());
     }
 
