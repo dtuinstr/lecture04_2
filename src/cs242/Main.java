@@ -14,13 +14,5 @@ public class Main {
         System.out.println("unitX: " + unitX);
         System.out.println("unitY: " + unitY);
 
-        q1.moveUp(2);
-        q1.slideOver(-0.5);
-
-        System.out.println("AFTER TRANSLATING TRIANGLE");
-        System.out.println("q1: " + q1);
-        System.out.println("Origin: " + origin);
-        System.out.println("unitX: " + unitX);
-        System.out.println("unitY: " + unitY);
     }
 }

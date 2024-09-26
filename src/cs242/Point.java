@@ -1,59 +1,78 @@
 package cs242;
 
+import java.util.Objects;
+
 /**
  * Representation of a point on a 2-D plane.
  */
 public class Point {
-    public double x;
-    public double y;
-    public double r;
-    public double theta;
-    public double degrees;
+    private double x;
+    private double y;
 
     public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    public Point(double arg1, double arg2, boolean polar) {
-        if (polar) {
-            this.x = arg1 * Math.cos(arg2);
-            this.y = arg1 * Math.sin(arg2);
+    /**
+     * Copy constructor.
+     * @param p the point to copy.
+     */
+    public Point(Point p) {
+        this.x = p.x;
+        this.y = p.y;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getPolarRadius() {
+        return Math.sqrt(x * x + y * y);
+    }
+
+    public double getPolarAngleRadians() {
+        double result = Math.acos(x / getPolarRadius());
+        if (y >= 0) {
+            return result;
         } else {
-            this.x = arg1;
-            this.y = arg2;
+            return Math.PI * 2 - result;
         }
     }
 
-    /**
-     * Computes the radius and stores it in the field r.
-     */
-    public void computeRadius() {
-        this.r = Math.sqrt(x * x + y * y);
+    public double getPolarAngleDegrees() {
+        return Math.toDegrees(getPolarAngleRadians());
     }
 
     /**
-     * Returns the angle, in radians of this point's
-     * polar coordinate representation. Compute the
-     * radius before this call.
-     * @return the angle in radians.
+     * Computes the distance from this point to the other point.
+     * @param other the other point
+     * @return distance from this to the other point.
      */
-    public double getTheta() {
-        return Math.acos(x/this.r);
-    }
-
-    /**
-     * Compute and return the degree measure of the
-     * angle, if this point was expressed in polar
-     * co-ordinates. The radius must be computed before
-     * calling this method!
-     * @return the degree of the angle.
-     */
-    public double getAngleInDegrees() {
-        return Math.toDegrees(getTheta());
+    public double distanceTo(Point other) {
+        double dx = this.x - other.x;
+        double dy = this.y - other.y;
+        return Math.sqrt(dx * dx + dy * dy);
     }
 
     public String toString() {
         return "(" + x + ", " + y + ")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Point point = (Point) o;
+        return Double.compare(x, point.x) == 0 && Double.compare(y, point.y) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

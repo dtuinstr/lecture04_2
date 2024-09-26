@@ -17,18 +17,6 @@ public class Triangle {
         this.C = C;
     }
 
-    public void moveUp(double deltaY) {
-        A.y += deltaY;
-        B.y += deltaY;
-        C.y += deltaY;
-    }
-
-    public void slideOver(double distanceLeftOrRight) {
-        A.x += distanceLeftOrRight;
-        B.x += distanceLeftOrRight;
-        C.x += distanceLeftOrRight;
-    }
-
     public String toString() {
         return "{Triangle: " + A + ", " + B + ", "  + C + "}";
     }
